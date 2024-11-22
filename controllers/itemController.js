@@ -35,3 +35,12 @@ exports.createItem = [
         }
     },
 ];
+
+// itemController.js
+module.exports.updateItem = (req, res) => {
+    // Logic for updating an item based on the ID from the request
+    const itemId = req.params.id;
+    // You can use this ID to find the item in a database or perform other operations
+    // For now, let's simulate the update process
+    res.send(`Item with ID ${itemId} has been updated.`);
+};

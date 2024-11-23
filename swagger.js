@@ -5,8 +5,8 @@ const doc = {
         title: 'Items API',
         description: 'API documentation for the Items API',
     },
-    host: 'localhost:5000', // Replace with your Render domain when deployed
-    schemes: ['http', 'https'], // Use https in production
+    host: 'localhost:5001', 
+    schemes: ['http', 'https'], 
 };
 
 const outputFile = './swagger.json';

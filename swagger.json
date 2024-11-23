@@ -5,7 +5,7 @@
       "description": "API for managing users and items",
       "version": "1.0.0"
     },
-    "host": "localhost:5000",
+    "host": "localhost:5001",
     "basePath": "/",
     "schemes": ["http"],
     "paths": {

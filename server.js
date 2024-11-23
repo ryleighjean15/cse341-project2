@@ -1,26 +1,39 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger.json');
-const itemRoutes = require('./routes/itemRoutes');
-
-dotenv.config();
-
+const bodyParser = require('body-parser');
+const mongodb = require('./data/database');
+// const mongoose = require('mongoose');
 const app = express();
-app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected'))
-    .catch(err => console.error('MongoDB connection error:', err));
+const port = process.env.PORT || 5001;
 
-// Swagger route
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
-
-// API routes
-app.use('/api', itemRoutes);
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.use(bodyParser.json());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-AllowOrigin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested_With, Content-Type, Accept, Z-Key'
+    );
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    next();
 });
+app.use('/', require('./routes'));
+
+process.on('uncaughtException', (err, origin) => {
+    console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+});
+
+mongodb.initDb((err) => {
+    if(err) {
+        console.log(err);
+    }
+else {
+    app.listen(port, () => {console.log(`Database is listening and node Running on port ${port}`)});
+}
+});
+
+
+
+
+
+
+  

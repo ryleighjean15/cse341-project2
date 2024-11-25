@@ -1,0 +1,28 @@
+GET http://localhost:5001/items
+
+GET http://localhost:5001/items/674168d5656ef6c9cf36cddc
+
+POST http://localhost:5001/items
+Content-Type: application/json
+
+{    
+    "name": "New",
+    "hometown": "Item",
+    "dreamCar": "example",
+    "favoriteFood": "example",
+    "itemCategory": "example"
+}
+
+
+PUT http://localhost:5001/items/674168d5656ef6c9cf36cddc
+Content-Type: application/json
+
+{    
+    "name": "John Doe",
+    "hometown": "New York",
+    "dreamCar": "Tesla Model",
+    "favoriteFood": "Pizza",
+    "itemCategory": "Electronics"
+}
+
+DELETE http://localhost:5001/items/674168d5656ef6c9cf36cddc
